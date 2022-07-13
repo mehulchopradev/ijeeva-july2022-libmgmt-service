@@ -4,6 +4,12 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "books")
+@NamedQueries({
+        @NamedQuery(
+                name = "Book.findAllByTitleIncludes",
+                query = "from Book b where b.title like :substring"
+        )
+})
 public class Book {
 
     @Id

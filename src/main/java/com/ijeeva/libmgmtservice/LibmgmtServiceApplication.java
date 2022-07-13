@@ -1,6 +1,7 @@
 package com.ijeeva.libmgmtservice;
 
 import com.ijeeva.libmgmtservice.dao.BookRepository;
+import com.ijeeva.libmgmtservice.dao.projections.book.TitlePrice;
 import com.ijeeva.libmgmtservice.entities.Book;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -12,24 +13,24 @@ import java.util.List;
 import java.util.Optional;
 
 @SpringBootApplication
-public class LibmgmtServiceApplication implements CommandLineRunner {
+public class LibmgmtServiceApplication /* implements CommandLineRunner */ {
 
-	@Autowired
-	private BookRepository bookRepository;
+	/* @Autowired
+	private BookRepository bookRepository; */
 
 	public static void main(String[] args) {
 		SpringApplication.run(LibmgmtServiceApplication.class, args);
 	}
 
-	@Override
+	/* @Override
 	public void run(String... args) throws Exception {
 		/* Book book = new Book("Prog in groovy", 900.67f, 560);
 		book = this.bookRepository.save(book);
 		System.out.println(book); */
 
 		/* List<Book> books = Arrays.asList(
-				new Book("Scala programing", 1000f, 890),
-				new Book("5 point someone", 670.45f, 230)
+				new Book("Java in action", 1000f, 890),
+				new Book("HTML/CSS", 900.67f, 500)
 		);
 		this.bookRepository.saveAll(books); */
 
@@ -65,6 +66,28 @@ public class LibmgmtServiceApplication implements CommandLineRunner {
 				); */
 
 		// delete a particular book from the system
-		this.bookRepository.deleteById(2l);
-	}
+		// this.bookRepository.deleteById(2l);
+
+		// System.out.println(this.bookRepository.findBookByPagesGreaterThan(500));
+
+		// System.out.println(this.bookRepository.findBookByPagesGreaterThanAndPriceLessThan(500, 1000));
+		// System.out.println(this.bookRepository.countBookByPriceGreaterThan(700));
+		// System.out.println(this.bookRepository.findBookByTitleLike("%prog%"));
+		// System.out.println(this.bookRepository.findBookByPriceLessThanOrderByTitleDesc(800));
+		// System.out.println(this.bookRepository.existsBookByTitleStartingWith("python"));
+
+		/* List<TitlePrice> books = this.bookRepository.findBookByTitleLike("%prog%");
+		books.forEach(book -> {
+			System.out.println(book.getTitle());
+			System.out.println(book.getPrice());
+		}); */
+
+		/* List<Book> books = this.bookRepository.findAllByTitleIncludes("%prog%");
+		System.out.println(books); */
+
+		/* this.bookRepository.groupByPriceCountBooks().forEach(element -> {
+			System.out.println(element[0]);
+			System.out.println(element[1]);
+		});
+	} */
 }
