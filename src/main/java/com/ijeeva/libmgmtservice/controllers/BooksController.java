@@ -2,6 +2,7 @@ package com.ijeeva.libmgmtservice.controllers;
 
 import com.ijeeva.libmgmtservice.dao.BookRepository;
 import com.ijeeva.libmgmtservice.entities.Book;
+import com.ijeeva.libmgmtservice.exceptions.BookNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -29,7 +30,7 @@ public class BooksController {
             return optional.get();
         }
 
-        return null;
+        throw new BookNotFoundException(String.format("book with id %s not found", bookId));
     }
 
     @PostMapping
@@ -50,6 +51,12 @@ public class BooksController {
             return this.bookRepository.save(book1);
         }
 
-        return null;
+        throw new BookNotFoundException(String.format("book with id %s not found", bookId));
+    }
+
+    @DeleteMapping("/{bookId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteBook(@PathVariable Long bookId) {
+        this.bookRepository.deleteById(bookId);
     }
 }

@@ -1,6 +1,7 @@
 package com.ijeeva.libmgmtservice.entities;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "books")
@@ -24,6 +25,9 @@ public class Book {
 
     @Column(nullable = false)
     private Integer pages;
+
+    @OneToMany(mappedBy = "book")
+    private Set<BookStudent> studentsIssued;
 
     public Book() {}
 
@@ -63,6 +67,14 @@ public class Book {
 
     public void setPages(Integer pages) {
         this.pages = pages;
+    }
+
+    public Set<BookStudent> getStudentsIssued() {
+        return studentsIssued;
+    }
+
+    public void setStudentsIssued(Set<BookStudent> studentsIssued) {
+        this.studentsIssued = studentsIssued;
     }
 
     @Override
