@@ -1,6 +1,7 @@
 package com.ijeeva.libmgmtservice.entities;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 import java.util.Set;
 
 @Entity
@@ -11,12 +12,18 @@ public class Student {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank
+    @Size(min = 1, max = 20, message = "Student name must be not more than 20 chars")
     @Column(nullable = false, length = 20)
     private String name;
 
+    @NotNull
     @Column(nullable = false, length = 1)
     private Character gender;
 
+    @NotNull
+    @DecimalMin("1")
+    @DecimalMax("100")
     @Column(nullable = false)
     private Integer roll;
 
